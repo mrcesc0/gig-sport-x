@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "graph": "nx affected:graph",
+    "graph": "nx graph --affected",
     "test:all": "nx run-many --target=test",
     "build:all": "nx run-many --target=build",
     "dev:sportx": "npx nx run @gig-sport-x/app-sport-x:dev",
