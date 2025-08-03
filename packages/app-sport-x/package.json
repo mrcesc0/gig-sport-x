@@ -1,0 +1,8 @@
+{
+  "name": "@gig-sport-x/app-sport-x",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@gig-sport-x/lib-ui": "*"
+  }
+}

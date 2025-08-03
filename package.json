@@ -5,7 +5,9 @@
   "scripts": {
     "graph": "nx affected:graph",
     "test:all": "nx run-many --target=test",
-    "build:all": "nx run-many --target=build"
+    "build:all": "nx run-many --target=build",
+    "dev:sportx": "npx nx run @gig-sport-x/app-sport-x:dev",
+    "build:sportx": "npx nx run @gig-sport-x/app-sport-x:build"
   },
   "private": true,
   "devDependencies": {
@@ -20,6 +22,7 @@
     "@nx/vite": "21.3.11",
     "@nx/web": "21.3.11",
     "@swc-node/register": "~1.9.1",
+    "@swc/cli": "~0.6.0",
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
     "@swc/jest": "~0.2.38",
@@ -62,6 +65,7 @@
   ],
   "dependencies": {
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "react-router-dom": "6.29.0"
   }
 }

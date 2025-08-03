@@ -11,6 +11,9 @@
     },
     {
       "path": "./packages/lib-ui"
+    },
+    {
+      "path": "./packages/app-sport-x"
     }
   ]
 }
