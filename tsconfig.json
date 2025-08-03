@@ -8,6 +8,9 @@
     },
     {
       "path": "./packages/svc-logger"
+    },
+    {
+      "path": "./packages/lib-ui"
     }
   ]
 }
