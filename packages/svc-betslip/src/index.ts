@@ -1,1 +1,1 @@
-export * from './lib/svc-betslip.js';
+export { BetslipService } from './betslip.service.js';
