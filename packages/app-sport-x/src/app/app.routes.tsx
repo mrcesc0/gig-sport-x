@@ -1,22 +1,25 @@
-import { Route, Routes, Link } from 'react-router-dom';
+import { useObservable } from '@gig-sport-x/lib-utils';
+import { SportService } from '@gig-sport-x/svc-sport';
+import { Route, Routes } from 'react-router-dom';
 
 export const AppRoutes = () => {
+  const events = useObservable(SportService.Instance.getEvents$());
+
   return (
     <Routes>
       <Route
         path="/"
         element={
           <div>
-            This is the generated root route.{' '}
-            <Link to="/page-2">Click here for page 2.</Link>
-          </div>
-        }
-      />
-      <Route
-        path="/page-2"
-        element={
-          <div>
-            <Link to="/">Click here to go back to root page.</Link>
+            <nav role="navigation" aria-label="Main navigation">
+              {events?.map((event) => (
+                <ul key={event.id}>
+                  <li>{event.sport.label}</li>
+                  <li>{event.category.label}</li>
+                  <li>{event.competition.label}</li>
+                </ul>
+              ))}
+            </nav>
           </div>
         }
       />

@@ -34,6 +34,12 @@
   "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
   "references": [
     {
+      "path": "../svc-sport/tsconfig.lib.json"
+    },
+    {
+      "path": "../lib-utils/tsconfig.lib.json"
+    },
+    {
       "path": "../lib-ui/tsconfig.lib.json"
     }
   ]

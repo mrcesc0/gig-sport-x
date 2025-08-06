@@ -1,22 +1,19 @@
 {
+  "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
   "references": [
     {
-      "path": "../svc-sport"
-    },
-    {
       "path": "../lib-utils"
     },
     {
-      "path": "../lib-ui"
+      "path": "../lib-schemas"
     },
     {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.lib.json"
     },
     {
       "path": "./tsconfig.spec.json"
     }
-  ],
-  "extends": "../../tsconfig.base.json"
+  ]
 }

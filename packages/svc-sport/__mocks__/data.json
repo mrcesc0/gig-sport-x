@@ -1,0 +1,195 @@
+{
+  "events": [
+    {
+      "id": 3340789,
+      "label": "Turquie / Pays-Bas",
+      "start": "2021-03-24T20:45:00.000+01:00",
+      "competition": {
+        "label": "Qualifications Coupe du Monde, UEFA"
+      },
+      "category": {
+        "label": "International"
+      },
+      "sport": {
+        "label": "Football",
+        "icon": "soccer"
+      },
+      "bet": {
+        "953125720": {
+          "question": {
+            "label": "Qui va gagner le match ?"
+          },
+          "choices": [
+            {
+              "id": 4194768007,
+              "odd": 3.9,
+              "actor": {
+                "id": 28157,
+                "label": "Turquie"
+              }
+            },
+            {
+              "id": 4194768008,
+              "odd": 3.1,
+              "actor": {
+                "id": 1,
+                "label": "Nul"
+              }
+            },
+            {
+              "id": 4194768009,
+              "odd": 1.68,
+              "actor": {
+                "id": 28145,
+                "label": "Pays-Bas"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 3340790,
+      "label": "Lettonie / Mont\u00e9n\u00e9gro",
+      "start": "2021-03-24T20:45:00.000+01:00",
+      "competition": {
+        "label": "Qualifications Coupe du Monde, UEFA"
+      },
+      "category": {
+        "label": "International"
+      },
+      "sport": {
+        "label": "Football",
+        "icon": "soccer"
+      },
+      "bet": {
+        "953125723": {
+          "question": {
+            "label": "Qui va gagner le match ?"
+          },
+          "choices": [
+            {
+              "id": 4194768016,
+              "odd": 4.4,
+              "actor": {
+                "id": 28201,
+                "label": "Lettonie"
+              }
+            },
+            {
+              "id": 4194768017,
+              "odd": 2.97,
+              "actor": {
+                "id": 1,
+                "label": "Nul"
+              }
+            },
+            {
+              "id": 4194768018,
+              "odd": 1.63,
+              "actor": {
+                "id": 28172,
+                "label": "Mont\u00e9n\u00e9gro"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 3340795,
+      "start": "2021-03-24T20:45:00.000+01:00",
+      "competition": {
+        "label": "Qualifications Coupe du Monde, UEFA"
+      },
+      "category": {
+        "label": "International"
+      },
+      "sport": {
+        "label": "Football",
+        "icon": "soccer"
+      },
+      "bet": {
+        "953125736": {
+          "question": {
+            "label": "Qui va gagner le match ?"
+          },
+          "choices": [
+            {
+              "id": 4194768051,
+              "odd": 9,
+              "actor": {
+                "id": 38122,
+                "label": "Estonie"
+              }
+            },
+            {
+              "id": 4194768053,
+              "odd": 1.18,
+              "actor": {
+                "id": 28158,
+                "label": "R\u00e9publique Tch\u00e8que"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 3240199,
+      "label": "Getafe / Valencia",
+      "start": "2021-02-27T21:00:00.000+01:00",
+      "competition": {
+        "label": "Liga Santander"
+      },
+      "category": {
+        "label": "Espagne"
+      },
+      "sport": {
+        "label": "Football",
+        "icon": "soccer"
+      },
+      "bet": {
+        "953070894": {
+          "question": {
+            "label": "Qui va gagner le match ?"
+          },
+          "choices": [
+            {
+              "id": 4194526036,
+              "odd": 2.42,
+              "actor": {
+                "id": 379470,
+                "label": "Getafe"
+              }
+            },
+            {
+              "id": 4194526037,
+              "odd": 2.85,
+              "actor": {
+                "id": 1,
+                "label": "Nul"
+              }
+            },
+            {
+              "id": 4194526038,
+              "odd": 3.15,
+              "actor": {
+                "id": 379890,
+                "label": "Valencia"
+              }
+            },
+            {
+              "id": 4194526040,
+              "odd": 2.15,
+              "actor": {
+                "id": 379891,
+                "label": "Other"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

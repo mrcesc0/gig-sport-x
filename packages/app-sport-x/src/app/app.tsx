@@ -5,7 +5,7 @@ import { AppRoutes } from './app.routes';
 export function App() {
   return (
     <LayoutDefault
-      Header={<Header />}
+      Header={<Header title="SportX Senior Lead Frontend tech test" />}
       Content={<AppRoutes />}
       Sidebar={<Betslip />}
       Footer={<Footer />}

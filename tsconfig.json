@@ -17,6 +17,12 @@
     },
     {
       "path": "./packages/svc-betslip"
+    },
+    {
+      "path": "./packages/lib-schemas"
+    },
+    {
+      "path": "./packages/svc-sport"
     }
   ]
 }
