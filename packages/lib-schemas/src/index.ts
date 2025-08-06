@@ -50,3 +50,5 @@ export const SportEventsResponseSchema = z.object({
 });
 
 export type SportEvent = z.infer<typeof SportEventSchema>;
+export type Choice = z.infer<typeof ChoiceSchema>;
+export type BetItem = z.infer<typeof BetItemSchema>;

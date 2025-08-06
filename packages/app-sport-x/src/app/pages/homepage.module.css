@@ -1,0 +1,78 @@
+.event {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.metaList {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+}
+
+.metaItem {
+  font-size: 0.875rem;
+  color: #555;
+  background-color: #f5f5f5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+}
+
+.metaSeparator {
+  content: '/';
+  margin: 0 0.25rem;
+  color: #aaa;
+}
+
+.eventLabel {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.bet {
+  margin: 1rem 0;
+}
+
+.betQuestion {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.choice {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  margin: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.choice:hover {
+  background-color: #e0e0e0;
+  border-color: #aaa;
+}
+
+.choice.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #005edc;
+  box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.3);
+}
+
+.choice.active:hover {
+  background-color: #0069d9;
+}

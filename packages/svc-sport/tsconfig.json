@@ -4,6 +4,9 @@
   "include": [],
   "references": [
     {
+      "path": "../svc-logger"
+    },
+    {
       "path": "../lib-utils"
     },
     {

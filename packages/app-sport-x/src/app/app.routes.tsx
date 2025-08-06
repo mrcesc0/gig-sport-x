@@ -1,28 +1,11 @@
-import { useObservable } from '@gig-sport-x/lib-utils';
-import { SportService } from '@gig-sport-x/svc-sport';
 import { Route, Routes } from 'react-router-dom';
 
-export const AppRoutes = () => {
-  const events = useObservable(SportService.Instance.getEvents$());
+import { Homepage } from './pages/homepage';
 
+export const AppRoutes = () => {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <div>
-            <nav role="navigation" aria-label="Main navigation">
-              {events?.map((event) => (
-                <ul key={event.id}>
-                  <li>{event.sport.label}</li>
-                  <li>{event.category.label}</li>
-                  <li>{event.competition.label}</li>
-                </ul>
-              ))}
-            </nav>
-          </div>
-        }
-      />
+      <Route path="/" element={<Homepage />} />
     </Routes>
   );
 };

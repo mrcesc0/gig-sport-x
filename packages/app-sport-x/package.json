@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@gig-sport-x/lib-ui": "*"
+    "@gig-sport-x/lib-ui": "*",
+    "@gig-sport-x/lib-schemas": "*"
   }
 }
