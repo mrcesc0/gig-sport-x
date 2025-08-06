@@ -9,6 +9,9 @@
       "path": "../lib-utils"
     },
     {
+      "path": "../lib-schemas"
+    },
+    {
       "path": "../lib-ui"
     },
     {

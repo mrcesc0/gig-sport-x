@@ -6,5 +6,5 @@ export interface FooterProps {
 
 // eslint-disable-next-line no-empty-pattern
 export const Footer = ({}: FooterProps) => {
-  return <div className={styles.footer}></div>;
+  return <div className={styles.footer}>GiG SportX 2025</div>;
 };

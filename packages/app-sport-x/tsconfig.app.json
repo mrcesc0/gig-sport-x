@@ -40,6 +40,9 @@
       "path": "../lib-utils/tsconfig.lib.json"
     },
     {
+      "path": "../lib-schemas/tsconfig.lib.json"
+    },
+    {
       "path": "../lib-ui/tsconfig.lib.json"
     }
   ]
