@@ -32,5 +32,16 @@
     "eslint.config.cjs",
     "eslint.config.mjs"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
+  "references": [
+    {
+      "path": "../svc-sport/tsconfig.lib.json"
+    },
+    {
+      "path": "../svc-betslip/tsconfig.lib.json"
+    },
+    {
+      "path": "../lib-schemas/tsconfig.lib.json"
+    }
+  ]
 }

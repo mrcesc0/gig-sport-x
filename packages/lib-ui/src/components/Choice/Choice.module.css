@@ -1,0 +1,30 @@
+.choice {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  margin: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.choice:hover {
+  background-color: #e0e0e0;
+  border-color: #aaa;
+}
+
+.choice.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #005edc;
+  box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.3);
+}
+
+.choice.active:hover {
+  background-color: #0069d9;
+}

@@ -2,9 +2,9 @@ import {
   SportEvent,
   SportEventsResponseSchema,
 } from '@gig-sport-x/lib-schemas';
-import { ReactiveState } from '@gig-sport-x/lib-utils';
+import { ReactiveState, ignoreNil } from '@gig-sport-x/lib-utils';
 import { Logger } from '@gig-sport-x/svc-logger';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 export class SportService {
   private static _instance: SportService;
@@ -13,8 +13,6 @@ export class SportService {
   private constructor() {
     this._events = new ReactiveState<SportEvent[] | null>(null);
 
-    // Fetch events when the services is initialized
-    // TODO implement an interval eventually
     this.fetchEvents$().subscribe({
       next: (events) => this._events.setState(events),
       error: (error) =>
@@ -26,6 +24,15 @@ export class SportService {
     return (
       SportService._instance || (SportService._instance = new SportService())
     );
+  }
+
+  get events$(): Observable<SportEvent[]> {
+    return this._events
+      .select$((events) => events)
+      .pipe(
+        ignoreNil(),
+        map((events) => events.filter((event) => event.label))
+      );
   }
 
   private fetchEvents$(): Observable<SportEvent[]> {
@@ -44,9 +51,5 @@ export class SportService {
           subscriber.error(error);
         });
     });
-  }
-
-  getEvents$(): Observable<SportEvent[] | null> {
-    return this._events.select$((events) => events);
   }
 }

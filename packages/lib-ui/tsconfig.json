@@ -3,6 +3,15 @@
   "include": [],
   "references": [
     {
+      "path": "../svc-sport"
+    },
+    {
+      "path": "../svc-betslip"
+    },
+    {
+      "path": "../lib-schemas"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

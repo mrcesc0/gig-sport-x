@@ -35,10 +35,19 @@ const SportSchema = z.object({
   icon: z.string(),
 });
 
+const UserBetSchema = z.object({
+  id: z
+    .string()
+    .regex(
+      /^\d+-\d+-\d+$/,
+      'ID must be three numbers separated by hyphens (e.g. 3340789-953125720-4194768007)'
+    ),
+});
+
 export const SportEventSchema = z.object({
   id: z.number(),
   label: z.string().optional(),
-  start: z.iso.datetime({ offset: true }), // ISO date with timezone
+  start: z.iso.datetime({ offset: true }),
   competition: CompetitionSchema,
   category: CategorySchema,
   sport: SportSchema,
@@ -49,6 +58,12 @@ export const SportEventsResponseSchema = z.object({
   events: z.array(SportEventSchema),
 });
 
+export const BetslipSchema = z.object({
+  bets: z.array(UserBetSchema),
+});
+
 export type SportEvent = z.infer<typeof SportEventSchema>;
 export type Choice = z.infer<typeof ChoiceSchema>;
 export type BetItem = z.infer<typeof BetItemSchema>;
+export type Betslip = z.infer<typeof BetslipSchema>;
+export type UserBet = z.infer<typeof UserBetSchema>;
