@@ -67,3 +67,9 @@ export type Choice = z.infer<typeof ChoiceSchema>;
 export type BetItem = z.infer<typeof BetItemSchema>;
 export type Betslip = z.infer<typeof BetslipSchema>;
 export type UserBet = z.infer<typeof UserBetSchema>;
+
+export enum BetslipType {
+  'Single' = 0,
+  'Multiple' = 1,
+  'System' = 2,
+}

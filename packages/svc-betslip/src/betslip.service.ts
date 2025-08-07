@@ -1,4 +1,4 @@
-import { Betslip, BetslipSchema } from '@gig-sport-x/lib-schemas';
+import { Betslip, BetslipSchema, BetslipType } from '@gig-sport-x/lib-schemas';
 import { ignoreNil, ReactiveState } from '@gig-sport-x/lib-utils';
 
 export class BetslipService {
@@ -24,6 +24,37 @@ export class BetslipService {
 
   get userBets$() {
     return this._betslip.select$((betslip) => betslip?.bets).pipe(ignoreNil());
+  }
+
+  get betslipType$() {
+    return this._betslip.select$((betslip) => {
+      if (!betslip) return null;
+
+      const { bets } = betslip;
+
+      if (bets.length === 0) {
+        return null;
+      }
+
+      if (bets.length === 1) {
+        return BetslipType.Single;
+      }
+
+      if (bets.length > 1) {
+        const fullBetIds = bets.map((bet) => {
+          const [eventId, betId] = bet.id.split('-', 2);
+          return `${eventId}-${betId}`;
+        });
+
+        const unique = new Set<string>(fullBetIds);
+
+        return unique.size === fullBetIds.length
+          ? BetslipType.Multiple
+          : BetslipType.System;
+      }
+
+      return null;
+    });
   }
 
   addUserBet(userBetId: string): void {
