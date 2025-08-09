@@ -3,7 +3,7 @@ import styles from './Betslip.module.css';
 import { Choice, BetslipType } from '@gig-sport-x/lib-schemas';
 import { BetslipService } from '@gig-sport-x/svc-betslip';
 import { SportService } from '@gig-sport-x/svc-sport';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,6 +22,7 @@ interface LocalUserBet {
 export const Betslip = () => {
   const [userBets, setUserBets] = useState<LocalUserBet[]>([]);
   const [betslipType, setBetslipType] = useState<BetslipType | null>(null);
+  const [total, setTotal] = useState<number>(0);
 
   useEffect(() => {
     const userBets$$ = combineLatest([
@@ -60,6 +61,56 @@ export const Betslip = () => {
       betslipType$$.unsubscribe();
     };
   }, []);
+
+  /**
+   * Handles input change for the betting amount and calculates the total potential payout.
+   *
+   * This function performs the calculation using **fixed-point arithmetic** to avoid floating-point precision errors
+   * commonly found in JavaScript (e.g., 0.1 + 0.2 !== 0.3). It uses `Math.round` to simulate accurate decimal calculations
+   * by scaling all values by 100 (effectively treating two decimal places as integers).
+   *
+   * ## Calculation Details:
+   * - The input amount is scaled by 100 and rounded (`Math.round(value * 100)`) to ensure precision up to 2 decimals.
+   * - Each odd is also scaled and rounded in the same way (`Math.round(odd * 100)`).
+   * - All scaled values are multiplied together.
+   * - The final product is divided by a `scalingFactor` to normalize the scale back to a decimal value.
+   *
+   * ## scalingFactor:
+   * - This is `100 ** (number of multiplied values)`:
+   *   - `100` for the amount.
+   *   - `100` for each odd.
+   * - For example, if you multiply 1 amount and 3 odds, then the scaling factor is `100^4 = 100000000`.
+   *   This corrects the over-scaling introduced during multiplication.
+   *
+   * ## Rounding and Formatting:
+   * - The final value is converted back to a float with exactly 2 decimal places using `toFixed(2)`.
+   * - `parseFloat` is used to convert the string result of `toFixed` back into a number for correct rendering.
+   *
+   */
+  const handleValueChange = useCallback(
+    (newValue: number) => {
+      if (isNaN(newValue)) {
+        setTotal(0);
+        return;
+      }
+
+      const amount = Math.round(newValue * 100);
+
+      const multiplier = userBets.reduce((accumulator, current) => {
+        const odd = current.choice?.odd ?? 1;
+        return accumulator * Math.round(odd * 100);
+      }, 1);
+
+      const scalingFactor = 100 ** (userBets.length + 1);
+
+      const total = parseFloat(
+        ((amount * multiplier) / scalingFactor).toFixed(2)
+      );
+
+      setTotal(total);
+    },
+    [userBets]
+  );
 
   if (betslipType === null) {
     return (
@@ -103,15 +154,28 @@ export const Betslip = () => {
         ))}
       </div>
 
-      <InputWithControls
-        ariaLabel="Bet amount"
-        defaultValue={0}
-        min={0}
-        step="0.10"
-        pattern="^\d+(\.\d{1,2})?$"
-        autoFocus={true}
-        required={true}
-      />
+      <div className={styles.amountContainer}>
+        <span className={styles.label}>Amount</span>
+        <InputWithControls
+          ariaLabel="Bet amount"
+          defaultValue={0}
+          min={0}
+          step="0.10"
+          pattern="^\d+(\.\d{1,2})?$"
+          autoFocus={true}
+          required={true}
+          onValueChange={handleValueChange}
+        />
+      </div>
+
+      <div className={styles.calcsContainer}>
+        <span className={styles.calc}>
+          Total <br /> <b>{total} &euro;</b>
+        </span>
+        <span className={styles.calc}>
+          Potencial Gain <br /> <b>{total} &euro;</b>
+        </span>
+      </div>
     </div>
   );
 };

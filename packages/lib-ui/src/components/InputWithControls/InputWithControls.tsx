@@ -1,7 +1,6 @@
 import styles from './InputWithControls.module.css';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Observable } from 'rxjs';
 
 interface InputWithControlsProps {
   min?: number;
@@ -14,13 +13,8 @@ interface InputWithControlsProps {
   disabled?: boolean;
   autoFocus?: boolean;
   pattern?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  getValue$?: () => Observable<number>;
+  onValueChange?: (newValue: number) => void;
 }
-
-type OnChangeEvent = React.ChangeEvent<
-  HTMLInputElement & { valueAsNumber: number }
->;
 
 export function InputWithControls({
   min,
@@ -33,17 +27,21 @@ export function InputWithControls({
   defaultValue,
   pattern,
   step = 'any',
-  onChange,
-  getValue$,
+  onValueChange,
 }: InputWithControlsProps) {
   const [value, setValue] = useState<number>(defaultValue);
 
   const numericStep = step === 'any' ? 1 : Number(step);
 
-  const handleInput = useCallback((event: OnChangeEvent) => {
-    const { valueAsNumber } = event.target;
-    setValue(valueAsNumber);
-  }, []);
+  const handleInput = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { valueAsNumber } = event.target as unknown as HTMLInputElement & {
+        valueAsNumber: number;
+      };
+      setValue(valueAsNumber);
+    },
+    []
+  );
 
   const decrease = useCallback(
     (_event: React.MouseEvent<HTMLButtonElement>) => {
@@ -74,14 +72,8 @@ export function InputWithControls({
   );
 
   useEffect(() => {
-    const getValue$$ = getValue$?.().subscribe({
-      next: (_value) => setValue(_value),
-    });
-
-    return () => {
-      getValue$$?.unsubscribe();
-    };
-  }, [getValue$]);
+    onValueChange?.(value);
+  }, [onValueChange, value]);
 
   return (
     <div className={styles.inputWithControls}>
@@ -102,7 +94,6 @@ export function InputWithControls({
         autoFocus={autoFocus}
         value={value}
         onInput={handleInput}
-        onChange={(event) => onChange?.(event)}
       />
       <button type="button" className={styles.inputBtn} onClick={increase}>
         +
