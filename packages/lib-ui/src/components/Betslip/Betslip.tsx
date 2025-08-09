@@ -189,6 +189,7 @@ export const Betslip = () => {
         <span className={styles.calc}>
           Potencial Gain <br /> <b>{total} &euro;</b>
         </span>
+        <button className={styles.submitButton}>Submit Bets</button>
       </div>
     </div>
   );
