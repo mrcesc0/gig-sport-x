@@ -3,9 +3,11 @@ import styles from './Betslip.module.css';
 import { Choice, BetslipType } from '@gig-sport-x/lib-schemas';
 import { BetslipService } from '@gig-sport-x/svc-betslip';
 import { SportService } from '@gig-sport-x/svc-sport';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { InputWithControls } from '../InputWithControls/InputWithControls';
 
 /**
  * @todo write a proper interface and move it to lib-schemas
@@ -18,13 +20,8 @@ interface LocalUserBet {
 }
 
 export const Betslip = () => {
-  const amountMin = 1;
-  const amountMax = 500;
-  const amountStep = 0.5;
-
   const [userBets, setUserBets] = useState<LocalUserBet[]>([]);
   const [betslipType, setBetslipType] = useState<BetslipType | null>(null);
-  const [amount, setAmount] = useState<number>(amountMin);
 
   useEffect(() => {
     const userBets$$ = combineLatest([
@@ -63,29 +60,6 @@ export const Betslip = () => {
       betslipType$$.unsubscribe();
     };
   }, []);
-
-  const decreaseAmount = () => {
-    setAmount((prev) => (prev > amountMin ? prev - amountStep : prev));
-  };
-
-  const increaseAmount = () => {
-    setAmount((prev) => (prev < amountMax ? prev + amountStep : prev));
-  };
-
-  const handleChange = (
-    // TODO fix built-in types
-    event: ChangeEvent<HTMLInputElement & { valueAsNumber: number }>
-  ) => {
-    const { valueAsNumber } = event.target;
-
-    if (
-      !isNaN(valueAsNumber) &&
-      valueAsNumber >= amountMin &&
-      valueAsNumber <= amountMax
-    ) {
-      setAmount(valueAsNumber);
-    }
-  };
 
   if (betslipType === null) {
     return (
@@ -129,34 +103,15 @@ export const Betslip = () => {
         ))}
       </div>
 
-      <div className={styles.inputWithControls}>
-        <button
-          type="button"
-          className={styles.inputBtn}
-          disabled={amount <= amountMin}
-          onClick={decreaseAmount}
-        >
-          −
-        </button>
-        <input
-          autoFocus
-          className={styles.input}
-          type="number"
-          inputMode="numeric"
-          min={amountMin}
-          max={amountMax}
-          value={amount}
-          onChange={handleChange}
-        />
-        <button
-          type="button"
-          className={styles.inputBtn}
-          disabled={amount >= amountMax}
-          onClick={increaseAmount}
-        >
-          +
-        </button>
-      </div>
+      <InputWithControls
+        ariaLabel="Bet amount"
+        defaultValue={0}
+        min={0}
+        step="0.10"
+        pattern="^\d+(\.\d{1,2})?$"
+        autoFocus={true}
+        required={true}
+      />
     </div>
   );
 };
