@@ -9,16 +9,26 @@ import { map } from 'rxjs/operators';
 
 import { InputWithControls } from '../InputWithControls/InputWithControls';
 
-/**
- * @todo write a proper interface and move it to lib-schemas
- */
 interface LocalUserBet {
   id: string;
-  eventLabel?: string;
-  questionLabel?: string;
+  event: {
+    label?: string;
+  };
+  question: {
+    label?: string;
+  };
   choice?: Choice;
 }
 
+/**
+ * `Betslip` is a UI component that displays the current state of a user's selected bets.
+ *
+ * It integrates with `BetslipService` and `SportService` to fetch bet data and render
+ * a list of selected choices, supporting both **Single** and **Multiple** ticket types.
+ *
+ * The component dynamically calculates the **total potential payout** using
+ * fixed-point arithmetic to avoid JavaScript floating-point errors.
+ */
 export const Betslip = () => {
   const [userBets, setUserBets] = useState<LocalUserBet[]>([]);
   const [betslipType, setBetslipType] = useState<BetslipType | null>(null);
@@ -39,8 +49,12 @@ export const Betslip = () => {
 
             return {
               id: userBet.id,
-              eventLabel: event?.label,
-              questionLabel: event?.bet[betId].question.label,
+              event: {
+                label: event?.label,
+              },
+              question: {
+                label: event?.bet[betId].question.label,
+              },
               choice: event?.bet[betId].choices.find(
                 (choice) => choice.id.toString() === choiceId
               ),
@@ -139,8 +153,8 @@ export const Betslip = () => {
       <div className={styles.betslipList}>
         {userBets.map((userBet) => (
           <div key={userBet.id} className={styles.betItem}>
-            <div className={styles.betEvent}>{userBet.eventLabel}</div>
-            <div className={styles.betQuestion}>{userBet.questionLabel}</div>
+            <div className={styles.betEvent}>{userBet.event.label}</div>
+            <div className={styles.betQuestion}>{userBet.question.label}</div>
             <div className={styles.betChoice}>
               {userBet.choice?.actor.label} - {userBet.choice?.odd}
             </div>

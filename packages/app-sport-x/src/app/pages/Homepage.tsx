@@ -6,6 +6,11 @@ import { SportEvent } from '@gig-sport-x/lib-schemas';
 import { Choice } from '@gig-sport-x/lib-ui';
 import { useEffect, useState } from 'react';
 
+/**
+ * `Homepage` is the main landing component that displays a list of sport events fetched from `SportService`.
+ * It renders detailed information for each event, including sport metadata, event label, start time, and
+ * available betting options (questions and choices).
+ */
 export function Homepage() {
   const [events, setEvents] = useState<SportEvent[]>([]);
 

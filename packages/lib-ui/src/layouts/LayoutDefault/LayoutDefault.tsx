@@ -12,6 +12,18 @@ export interface LayoutDefaultProps {
   Footer?: ReactNode;
 }
 
+/**
+ * A flexible and accessible page layout component with structured regions.
+ *
+ * `LayoutDefault` provides a common layout structure consisting of:
+ * - **Header**
+ * - **Main Content**
+ * - **Sidebar**
+ * - **Footer**
+ *
+ * Each section accepts a React node, making it reusable across different parts of an application.
+ * It includes proper ARIA roles to enhance accessibility for screen readers.
+ */
 export const LayoutDefault = ({
   Header,
   Content,

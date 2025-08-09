@@ -16,6 +16,20 @@ interface InputWithControlsProps {
   onValueChange?: (newValue: number) => void;
 }
 
+/**
+ * A numeric input component with increment and decrement buttons.
+ *
+ * `InputWithControls` provides a reusable number input field that includes
+ * two buttons to increase or decrease the value. It supports decimal steps, min/max limits,
+ * two-digit precision formatting, and integrates accessibility and keyboard input.
+ *
+ * ## Features:
+ * - Accepts `step`, `min`, and `max` props to constrain the input
+ * - Handles decimal precision (rounded to 2 decimals)
+ * - Falls back to step `1` if step is `"any"`
+ * - Notifies parent with `onValueChange` whenever the value changes
+ * - Fully accessible with ARIA attributes and labels
+ */
 export function InputWithControls({
   min,
   max,
@@ -31,8 +45,12 @@ export function InputWithControls({
 }: InputWithControlsProps) {
   const [value, setValue] = useState<number>(defaultValue);
 
+  // Fallback step when "any" is provided
   const numericStep = step === 'any' ? 1 : Number(step);
 
+  /**
+   * Handles manual user input (keyboard typing) and updates the state.
+   */
   const handleInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { valueAsNumber } = event.target as unknown as HTMLInputElement & {
@@ -43,6 +61,9 @@ export function InputWithControls({
     []
   );
 
+  /**
+   * Decreases the value by `step`, respecting the `min` limit and rounding to 2 decimals.
+   */
   const decrease = useCallback(
     (_event: React.MouseEvent<HTMLButtonElement>) => {
       setValue((currentValue = 0) => {
@@ -57,6 +78,9 @@ export function InputWithControls({
     [numericStep, min]
   );
 
+  /**
+   * Increases the value by `step`, respecting the `max` limit and rounding to 2 decimals.
+   */
   const increase = useCallback(
     (_event: React.MouseEvent<HTMLButtonElement>) => {
       setValue((currentValue) => {
@@ -71,6 +95,9 @@ export function InputWithControls({
     [numericStep, max]
   );
 
+  /**
+   * Notifies parent whenever `value` changes.
+   */
   useEffect(() => {
     onValueChange?.(value);
   }, [onValueChange, value]);

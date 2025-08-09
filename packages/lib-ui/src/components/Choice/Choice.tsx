@@ -9,6 +9,16 @@ interface ChoiceProps {
   userBetId: string;
 }
 
+/**
+ * UI component representing a single betting choice.
+ *
+ * The `Choice` component displays the label and odds of a given betting option.
+ * It is interactive and tied to the `BetslipService`, allowing users to toggle
+ * the selected state of the associated bet.
+ *
+ * The active state is reactive — it listens for changes from `BetslipService`
+ * using an observable subscription to keep the UI in sync.
+ */
 export function Choice({ choice, userBetId }: ChoiceProps) {
   const [isActive, setIsActive] = useState<boolean>(false);
 
